@@ -20,9 +20,24 @@ namespace ContosoUni.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Students.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_descc" : "Date";
+            var students = from s in _context.Students select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "date_desc":
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(await students.AsNoTracking().ToListAsync());
         }
 
         // GET: Students/Details/5
@@ -100,13 +115,12 @@ namespace ContosoUni.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,LastName,FirstMidName,EnrollmentDate")] Student student)
+        public async Task<IActionResult> EditPost(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var studentToUpdate = await _context.Students.SingleOrDefaultAsync(s => s.ID == id);
             if (await TryUpdateModelAsync<Student>(
                 studentToUpdate,
@@ -120,33 +134,13 @@ namespace ContosoUni.Controllers
                 }
                 catch (DbUpdateException /* ex */)
                 {
+                    //Log the error (uncomment ex variable name and write a log.)
                     ModelState.AddModelError("", "Unable to save changes. " +
                                                  "Try again, and if the problem persists, " +
                                                  "see your system administrator.");
-                    return View(studentToUpdate);
                 }
             }
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(student);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!StudentExists(student.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(student);
+            return View(studentToUpdate);
         }
 
         // GET: Students/Delete/5
