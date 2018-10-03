@@ -27,7 +27,7 @@ namespace ContosoUni.Data
         //create db connection without the need of context constructor
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ContosoUniversity;Trusted_Connection=True;MultipleActiveResultSets=true");
+            builder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=ContosoUniversity2;Trusted_Connection=True;MultipleActiveResultSets=true");
             base.OnConfiguring(builder);
         }
     }
