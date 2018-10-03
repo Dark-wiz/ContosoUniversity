@@ -28,8 +28,8 @@ namespace ContosoUni.Data
             modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
             modelBuilder.Entity<Department>().ToTable("Department");
-            modelBuilder.Entity<Instructor>().ToTable("OfficeAssignment");
-            modelBuilder.Entity<OfficeAssignment>().ToTable("Enrollment");
+            modelBuilder.Entity<Instructor>().ToTable("Instructor");
+            modelBuilder.Entity<OfficeAssignment>().ToTable("OfficeAssignment");
             modelBuilder.Entity<CourseAssignment>().ToTable("CourseAssignment");
 
             modelBuilder.Entity<CourseAssignment>().HasKey(c => new {c.CourseID, c.InstructorID});
