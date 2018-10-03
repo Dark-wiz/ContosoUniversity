@@ -9,7 +9,11 @@ namespace ContosoUni.Models
     public class Student
     {
         public int ID { get; set; }
-        public string LastName { get; set; }
+        [StringLength(50)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        public string LastName { get; set;}
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters")]
         public string FirstMidName { get; set; }
         //
         [DataType(DataType.Date)]
