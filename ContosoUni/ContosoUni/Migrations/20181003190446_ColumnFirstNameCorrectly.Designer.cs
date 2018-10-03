@@ -64,7 +64,7 @@ namespace ContosoUni.Migrations
                     b.Property<DateTime>("EnrollmentDate");
 
                     b.Property<string>("FirstMidName")
-                        .HasColumnName("FirstName")
+                        .HasColumnName("FirstMidName")
                         .HasMaxLength(50);
 
                     b.Property<string>("LastName")

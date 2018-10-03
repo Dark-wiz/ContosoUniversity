@@ -18,7 +18,7 @@ namespace ContosoUni.Models
         [Required]
         [Display(Name = "First Name")]
         [StringLength(50)]
-        public string FirstName { get; set; }
+        public string FirstMidName { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -27,7 +27,7 @@ namespace ContosoUni.Models
 
         [Display(Name = "Full Name")]
         public string FullName {
-            get { return LastName + " " + FirstName; }
+            get { return LastName + " " + FirstMidName; }
 
         }
 

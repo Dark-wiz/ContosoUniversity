@@ -18,7 +18,7 @@ namespace ContosoUni.Models
         //[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
         [Required]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters")]
-        [Column("FirstName")]
+        [Column("FirstMidName")]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
         //

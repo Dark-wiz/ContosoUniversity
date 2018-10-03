@@ -9,13 +9,13 @@ namespace ContosoUni.Migrations
             migrationBuilder.RenameColumn(
                 name: "First Name",
                 table: "Student",
-                newName: "FirstName");
+                newName: "FirstMidName");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "FirstName",
+                name: "FirstMidName",
                 table: "Student",
                 newName: "First Name");
         }
