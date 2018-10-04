@@ -195,7 +195,7 @@ namespace ContosoUni.Migrations
             modelBuilder.Entity("ContosoUni.Models.OfficeAssignment", b =>
                 {
                     b.HasOne("ContosoUni.Models.Instructor", "Instructor")
-                        .WithOne("OfficeAssignments")
+                        .WithOne("OfficeAssignment")
                         .HasForeignKey("ContosoUni.Models.OfficeAssignment", "InstructorID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
