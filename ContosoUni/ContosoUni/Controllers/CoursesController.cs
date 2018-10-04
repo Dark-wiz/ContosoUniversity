@@ -58,8 +58,7 @@ namespace ContosoUni.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CourseID,Credits,DepartmentID,Title")]
-            Course course)
+        public async Task<IActionResult> Create([Bind("CourseID,Credits,DepartmentID,Title")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +66,6 @@ namespace ContosoUni.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
             PopulateDepartmentsDropDownList(course.DepartmentID);
             return View(course);
         }
