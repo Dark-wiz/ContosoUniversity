@@ -34,9 +34,7 @@ namespace ContosoUni.Controllers
             {
                 return NotFound();
             }
-
             string query = "SELECT * FROM Department WHERE DepartmentID = {0}";
-
             var department = await _context.Departments
                 .FromSql(query, id)
                 .Include(d => d.Administrator)
@@ -46,7 +44,6 @@ namespace ContosoUni.Controllers
             {
                 return NotFound();
             }
-
             return View(department);
         }
 
@@ -174,6 +171,8 @@ ModelState.AddModelError("StartDate", $"Current value: {databaseValues.StartDate
             departmentToUpdate.InstructorID);
             return View(departmentToUpdate);
         }
+
+
         // GET: Departments/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? concurrencyError)
         {
