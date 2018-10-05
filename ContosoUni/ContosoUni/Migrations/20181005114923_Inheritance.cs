@@ -20,7 +20,7 @@ namespace ContosoUni.Migrations
             migrationBuilder.AlterColumn<DateTime>(name: "HireDate", table: "Person", nullable: true);
             migrationBuilder.AddColumn<int>(name: "OldId", table: "Person", nullable: true);
             // Copy existing Student data into new Person table.
-            migrationBuilder.Sql("INSERT INTO dbo.Person (LastName, FirstMidName, HireDate, EnrollmentDate,Discriminator, OldId) SELECT LastName, FirstMidName, null AS HireDate, EnrollmentDate, 'Student' AS Discriminator, ID AS OldId FROM dbo.Student");
+            migrationBuilder.Sql("INSERT INTO dbo.Person (LastName, FirstName, HireDate, EnrollmentDate,Discriminator, OldId) SELECT LastName, FirstName, null AS HireDate, EnrollmentDate, 'Student' AS Discriminator, ID AS OldId FROM dbo.Student");
 // Fix up existing relationships to match new PK's.
             migrationBuilder.Sql("UPDATE dbo.Enrollment SET StudentId = (SELECT ID FROM dbo.Person WHERE OldId = Enrollment.StudentId AND Discriminator = 'Student')");
 // Remove temporary key

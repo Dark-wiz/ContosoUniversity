@@ -2,22 +2,22 @@
 
 namespace ContosoUni.Migrations
 {
-    public partial class ColumnFirstName : Migration
+    public partial class RenameFirstNameProper : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
                 name: "FirstMidName",
                 table: "Person",
-                newName: "First Name");
+                newName: "FirstName");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "First Name",
+                name: "FirstMidName",
                 table: "Person",
-                newName: "FirstMidName");
+                newName: "FirstName");
         }
     }
 }

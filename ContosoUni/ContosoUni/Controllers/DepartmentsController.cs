@@ -27,7 +27,7 @@ namespace ContosoUni.Controllers
             return View(await schoolContext.ToListAsync());
         }
 
-        // GET: Departments/Details/5
+        // GET: Departments/Details/5 
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,10 +35,13 @@ namespace ContosoUni.Controllers
                 return NotFound();
             }
 
+            string query = "SELECT * FROM Department WHERE DepartmentID = {0}";
+
             var department = await _context.Departments
+                .FromSql(query, id)
                 .Include(d => d.Administrator)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.DepartmentID == id);
+                .SingleOrDefaultAsync();
             if (department == null)
             {
                 return NotFound();
