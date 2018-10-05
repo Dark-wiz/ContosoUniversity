@@ -178,7 +178,6 @@ ModelState.AddModelError("StartDate", $"Current value: {databaseValues.StartDate
             {
                 return NotFound();
             }
-
             var department = await _context.Departments
                 .Include(d => d.Administrator)
                 .AsNoTracking()
@@ -187,21 +186,19 @@ ModelState.AddModelError("StartDate", $"Current value: {databaseValues.StartDate
             {
                 if (concurrencyError.GetValueOrDefault())
                 {
-                    return (RedirectToAction(nameof(Index)));
+                    return RedirectToAction(nameof(Index));
                 }
                 return NotFound();
             }
-
             if (concurrencyError.GetValueOrDefault())
             {
-                ViewData["ConcurrencyMessage"] = "The record you attempted to delete "
-                    + "was modified by another user after you got the original values. "
-                    + "The delete operation was canceled and the current values in the "
-                    + "database have been displayed. If you still want to delete this "
-                    + "record, click the Delete button again. Otherwise "
-                    + "click the Back to List hyperlink.";
+                ViewData["ConcurrencyErrorMessage"] = "The record you attempted to delete "
+                                                      + "was modified by another user after you got the original values. "
+                                                      + "The delete operation was canceled and the current values in the "
+                                                      + "database have been displayed. If you still want to delete this "
+                                                      + "record, click the Delete button again. Otherwise "
+                                                      + "click the Back to List hyperlink.";
             }
-
             return View(department);
         }
 
